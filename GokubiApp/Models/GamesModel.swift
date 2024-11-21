@@ -1,6 +1,6 @@
 //
 //  GamesModel.swift
-//  gokubi.app
+//  GokubiApp.app
 //
 //  Created by Alzea Arafat on 03/11/24.
 //
@@ -40,15 +40,16 @@ enum Genres: String, Codable, CaseIterable {
 final class GamesModel {
     var title: String
     var developer: String
-    var playtime: Int
-    var rating: Int?
+    var playtime: Double
+    var rating: Int
     var notes: String?
     var completed: Bool
     var dateAdded: Date
     var genre: Genres
     var platforms: Platforms
+    var coverImageData: Data?
     
-    init(title: String, developer: String, playtime: Int, rating: Int? = nil, notes: String? = nil, completed: Bool, dateAdded: Date, genre: Genres, platforms: Platforms) {
+    init(title: String, developer: String, playtime: Double, rating: Int, notes: String? = nil, completed: Bool, dateAdded: Date, genre: Genres, platforms: Platforms, coverImageData: Data? = nil) {
         self.title = title
         self.developer = developer
         self.playtime = playtime
@@ -58,5 +59,6 @@ final class GamesModel {
         self.dateAdded = dateAdded
         self.genre = genre
         self.platforms = platforms
+        self.coverImageData = coverImageData
     }
 }

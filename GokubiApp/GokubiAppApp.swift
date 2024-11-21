@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct GokubiAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeScreenView()
         }
+        .modelContainer(for: GamesModel.self)
     }
 }

@@ -1,6 +1,6 @@
 //
 //  HomeScreen.swift
-//  gokubi.app
+//  GokubiApp.app
 //
 //  Created by Alzea Arafat on 03/11/24.
 //
@@ -15,53 +15,66 @@ struct HomeScreenView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ForEach(games) { game in
-                    Text(game.title)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 18) {
+                    ForEach(games) { game in
+                        GameCardView(game: game)
+                            .padding(.horizontal, 16)
+                    }
                 }
-            }
-            .navigationTitle("Gokubi")
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack {
-                        Text("LOGO")
-                        
-                        Spacer()
-                        
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack {
+                            Text("LOGO")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             isPresented.toggle()
                         } label: {
                             Image(systemName: "plus")
                         }
                         .sheet(isPresented: $isPresented) {
-                            VStack {
-                                Text("Add Game")
-                                    .fontDesign(.rounded)
-                                
-                                AddGameScreenView(
-                                    game: GamesModel(
-                                        title: "",
-                                        developer: "",
-                                        playtime: 0,
-                                        rating: 0,
-                                        notes: "",
-                                        completed: false,
-                                        dateAdded: .now,
-                                        genre: .action,
-                                        platforms: .pc
-                                    ),
-                                    isPresented: $isPresented
-                                )
-                                .presentationDetents([.large])
-                                .presentationCornerRadius(18)
-                                .presentationDragIndicator(.visible)
+                            NavigationStack {
+                                VStack {
+                                    AddGameScreenView(
+                                        game: GamesModel(
+                                            title: "",
+                                            developer: "",
+                                            playtime: 0,
+                                            rating: 0,
+                                            notes: "",
+                                            completed: false,
+                                            dateAdded: .now,
+                                            genre: .action,
+                                            platforms: .pc,
+                                            coverImageData: nil
+                                        ),
+                                        isPresented: $isPresented
+                                    )
+                                    .scrollIndicators(.hidden)
+                                }
+                                .toolbar {
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button {
+                                            isPresented.toggle()
+                                        } label: {
+                                            Image(systemName: "xmark")
+                                                .foregroundStyle(.gray)
+                                        }
+                                    }
+                                }
+                                .navigationTitle("Add Game")
+                                .navigationBarTitleDisplayMode(.inline)
                             }
-                            .padding(.top, 24)
-                            .background(.slate50)
                         }
+                        .presentationDetents([.large])
+                        .presentationCornerRadius(18)
+                        .presentationDragIndicator(.visible)
                     }
                 }
             }
+            .background(.slate50)
         }
     }
     
@@ -73,6 +86,6 @@ struct HomeScreenView: View {
     }
 }
 
-#Preview {
-    HomeScreenView()
-}
+//#Preview {
+//    HomeScreenView()
+//}
