@@ -11,7 +11,7 @@ struct RatingView: View {
     @Binding var rating: Int
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             Text("Rating")
                 .font(.subheadline)
                 .foregroundColor(.gray)

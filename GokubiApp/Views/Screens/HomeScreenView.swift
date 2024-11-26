@@ -9,19 +9,18 @@ import SwiftUI
 import SwiftData
 
 struct HomeScreenView: View {
-    @Query var games: [GamesModel]
+    @Query(sort: \GamesModel.dateAdded, order: .reverse) var games: [GamesModel]
     @State private var isPresented: Bool = false
     @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-                VStack {
+                VStack(alignment: .center, spacing: 18) {
                     Image("dummy-header")
                         .resizable()
-                        .scaledToFill()
-                        .frame(height: 300) // Adjust height as needed
-                        .ignoresSafeArea(edges: .top) // Ignore safe area on top
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity) // Adjust height as needed
                         .overlay(
                             LinearGradient(
                                 gradient: Gradient(colors: [Color.black.opacity(0.3), Color.clear]),
@@ -29,14 +28,14 @@ struct HomeScreenView: View {
                                 endPoint: .top
                             )
                         )
+                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     
-                    VStack(spacing: 18) {
-                        ForEach(games) { game in
+                    ForEach(games) { game in
+                        NavigationLink(destination: GameDetailScreenView(game: game)) {
                             GameCardView(game: game)
                                 .padding(.horizontal, 16)
                         }
                     }
-                    .padding(.top, -30)
                 }
             }
             .toolbar {
