@@ -63,7 +63,7 @@ struct GameCardView: View {
                         .scaledToFit()
                         .frame(width: 18, height: 18)
                     
-                    Text("Ratings: \(game.rating)")
+                    Text("\(game.rating)/5")
                         .font(.subheadline)
                         .fontDesign(.rounded)
                 }

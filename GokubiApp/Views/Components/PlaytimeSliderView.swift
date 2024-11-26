@@ -11,7 +11,7 @@ struct PlaytimeSliderView: View {
     @Binding var playtime: Double
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             let formattedPlaytime = Int(playtime) // Format as Int for display
 	
             // Display playtime text

@@ -16,75 +16,91 @@ struct HomeScreenView: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-                VStack(spacing: 18) {
-                    ForEach(games) { game in
-                        GameCardView(game: game)
-                            .padding(.horizontal, 16)
-                    }
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        HStack {
-                            Text("LOGO")
+                VStack {
+                    Image("dummy-header")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 300) // Adjust height as needed
+                        .ignoresSafeArea(edges: .top) // Ignore safe area on top
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.black.opacity(0.3), Color.clear]),
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                        )
+                    
+                    VStack(spacing: 18) {
+                        ForEach(games) { game in
+                            GameCardView(game: game)
+                                .padding(.horizontal, 16)
                         }
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            isPresented.toggle()
-                        } label: {
-                            Image(systemName: "plus")
-                        }
-                        .sheet(isPresented: $isPresented) {
-                            NavigationStack {
-                                VStack {
-                                    AddGameScreenView(
-                                        game: GamesModel(
-                                            title: "",
-                                            developer: "",
-                                            playtime: 0,
-                                            rating: 0,
-                                            notes: "",
-                                            completed: false,
-                                            dateAdded: .now,
-                                            genre: .action,
-                                            platforms: .pc,
-                                            coverImageData: nil
-                                        ),
-                                        isPresented: $isPresented
-                                    )
-                                    .scrollIndicators(.hidden)
-                                }
-                                .toolbar {
-                                    ToolbarItem(placement: .cancellationAction) {
-                                        Button {
-                                            isPresented.toggle()
-                                        } label: {
-                                            Image(systemName: "xmark")
-                                                .foregroundStyle(.gray)
-                                        }
-                                    }
-                                }
-                                .navigationTitle("Add Game")
-                                .navigationBarTitleDisplayMode(.inline)
-                            }
-                        }
-                        .presentationDetents([.large])
-                        .presentationCornerRadius(18)
-                        .presentationDragIndicator(.visible)
-                    }
+                    .padding(.top, -30)
                 }
             }
-            .background(.slate50)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Text("LOGO")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .sheet(isPresented: $isPresented) {
+                        NavigationStack {
+                            VStack {
+                                AddGameScreenView(
+                                    game: GamesModel(
+                                        title: "",
+                                        developer: "",
+                                        playtime: 0,
+                                        rating: 0,
+                                        notes: "",
+                                        completed: false,
+                                        dateAdded: .now,
+                                        genre: .action,
+                                        platforms: .pc,
+                                        coverImageData: nil
+                                    ),
+                                    isPresented: $isPresented
+                                )
+                                .scrollIndicators(.hidden)
+                            }
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button {
+                                        isPresented.toggle()
+                                    } label: {
+                                        Image(systemName: "xmark")
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                            }
+                            .navigationTitle("Add Game")
+                            .navigationBarTitleDisplayMode(.inline)
+                        }
+                    }
+                    .presentationDetents([.large])
+                    .presentationCornerRadius(18)
+                    .presentationDragIndicator(.visible)
+                }
+            }
         }
-    }
-    
-    func deleteGames(at offsets: IndexSet) {
-        for index in offsets {
-            let game = games[index]
-            modelContext.delete(game)
-        }
+        .background(.slate50)
     }
 }
+    
+//    func deleteGames(at offsets: IndexSet) {
+//        for index in offsets {
+//            let game = games[index]
+//            modelContext.delete(game)
+//        }
+//    }
 
 //#Preview {
 //    HomeScreenView()
