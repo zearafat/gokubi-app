@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameCardView: View {
-    var game: GamesModel
+    let game: GamesModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,14 +19,13 @@ struct GameCardView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 44, height: 44) // Adjust frame as needed
-                        .cornerRadius(8)
+                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 } else {
                     // Placeholder if image data is unavailable
                     Image("coverartdummy")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 44, height: 44)
-                        .foregroundColor(.gray)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
                 
@@ -70,24 +69,18 @@ struct GameCardView: View {
                 
                 HStack(alignment: .center, spacing: 6) {
                     if game.completed {
-                        Text("Completed")
-                            .foregroundStyle(.white)
-                            .fontWeight(.semibold)
-                            .font(.subheadline)
-                            .fontDesign(.rounded)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 16)
-                            .background(.green)
-                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                        BadgeView(
+                            icon: "medal.fill",
+                            label: "Completed",
+                            labelColor: .white,
+                            backgroundColor: .green
+                        )
                     } else {
-                        Text("In Progress")
-                            .foregroundStyle(.white)
-                            .font(.subheadline)
-                            .fontDesign(.rounded)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 16)
-                            .background(.gray)
-                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                        BadgeView(
+                            label: "On Progress",
+                            labelColor: .secondary,
+                            backgroundColor: .slate200
+                        )
                     }
                 }
             }
