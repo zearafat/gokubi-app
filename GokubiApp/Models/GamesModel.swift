@@ -9,12 +9,12 @@ import Foundation
 import SwiftData
 
 enum Platforms: String, Codable, CaseIterable {
-    case ps4
-    case ps5
-    case xboxSeries
-    case pc
-    case nintendoSwitch
-    case mobile
+    case ps4 = "PlayStation 4"
+    case ps5 = "PlayStation 5"
+    case xboxSeries = "Xbox Series X|S"
+    case pc = "PC"
+    case nintendoSwitch = "Nintendo Switch"
+    case mobile = "Mobile"
 }
 
 enum Genres: String, Codable, CaseIterable {

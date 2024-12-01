@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameDetailScreenView: View {
-    let game: GamesModel
+    var game: GamesModel
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -19,14 +19,14 @@ struct GameDetailScreenView: View {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: .infinity , height: 140)
+                            .frame(maxWidth: .infinity)
                             .clipShape(Rectangle())
                     } else {
                         // Placeholder if image data is unavailable
                         Image("coverartdummy")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: .infinity , height: 140)
+                            .frame(maxWidth: .infinity)
                             .clipShape(Rectangle())
                     }
                     
@@ -86,128 +86,13 @@ struct GameDetailScreenView: View {
                                 )
                             }
                         }
+                        
                         Text("By \(game.developer)")
                             .foregroundStyle(.secondary)
                             .fontDesign(.rounded)
                     }
                     
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Gaming Stats")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                        
-                        HStack {
-                            // PLAYTIME
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Image(systemName: "clock.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                    
-                                    Text("Playtime")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .fontDesign(.rounded)
-                                }
-                                
-                                Text("\(game.playtime.formatted(.number.precision(.fractionLength(0)))) hours")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .fontDesign(.rounded)
-                            }
-                            .padding(.trailing, 40)
-                            .padding(.vertical, 16)
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                    .stroke(.slate400, lineWidth: 0.5)
-                            )
-                            
-                            // RATING
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                    
-                                    Text("Rating")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .fontDesign(.rounded)
-                                }
-                                
-                                Text("\(game.rating) out of 5")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .fontDesign(.rounded)
-                            }
-                            .padding(.trailing, 40)
-                            .padding(.vertical, 16)
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                    .stroke(.slate400, lineWidth: 0.5)
-                            )
-                        }
-                        
-                        HStack {
-                            // PLAYTIME
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Image(systemName: "clock.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                    
-                                    Text("Genre")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .fontDesign(.rounded)
-                                }
-                                
-                                Text("\(game.genre)")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .fontDesign(.rounded)
-                            }
-                            .padding(.trailing, 40)
-                            .padding(.vertical, 16)
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                    .stroke(.slate400, lineWidth: 0.5)
-                            )
-                            
-                            // RATING
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Image(systemName: "star.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                    
-                                    Text("Platform")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                        .fontDesign(.rounded)
-                                }
-                                
-                                Text("\(game.platforms)")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .fontDesign(.rounded)
-                            }
-                            .padding(.trailing, 40)
-                            .padding(.vertical, 16)
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                    .stroke(.slate400, lineWidth: 0.5)
-                            )
-                        }
-                    }
+                    CardGameStatsView(game: game)
                 }
                 .padding(16)
             }
@@ -226,7 +111,7 @@ struct GameDetailScreenView: View {
             completed: true,
             dateAdded: .now,
             genre: .action,
-            platforms: .mobile,
+            platforms: .nintendoSwitch,
             coverImageData: .none
         )
     )
