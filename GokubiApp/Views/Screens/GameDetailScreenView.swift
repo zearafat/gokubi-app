@@ -18,15 +18,15 @@ struct GameDetailScreenView: View {
                     if let imageData = game.coverImageData, let uiImage = UIImage(data: imageData) {
                         Image(uiImage: uiImage)
                             .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity)
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity, maxHeight: 160)
                             .clipShape(Rectangle())
                     } else {
                         // Placeholder if image data is unavailable
                         Image("coverartdummy")
                             .resizable()
                             .scaledToFill()
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: 160)
                             .clipShape(Rectangle())
                     }
                     
@@ -34,7 +34,7 @@ struct GameDetailScreenView: View {
                     if let imageData = game.coverImageData, let uiImage = UIImage(data: imageData) {
                         Image(uiImage: uiImage)
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 84, height: 84)
                             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                             .overlay(
@@ -42,13 +42,13 @@ struct GameDetailScreenView: View {
                                     .stroke(.white, lineWidth: 4)
                             )
                             .shadow(color: Color.black.opacity(0.12) ,radius: 10, x: 0, y: 10)
-                            .padding(.top, 130)
+                            .padding(.top, 100)
                             .padding(.leading, -180)
                     } else {
                         // Placeholder if image data is unavailable
                         Image("coverartdummy")
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .frame(width: 84, height: 84)
                             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                             .overlay(
@@ -56,7 +56,7 @@ struct GameDetailScreenView: View {
                                     .stroke(.white, lineWidth: 4)
                             )
                             .shadow(color: Color.black.opacity(0.12) ,radius: 10, x: 0, y: 10)
-                            .padding(.top, 130)
+                            .padding(.top, 100)
                             .padding(.leading, -180)
                     }
                 }
@@ -93,10 +93,38 @@ struct GameDetailScreenView: View {
                     }
                     
                     CardGameStatsView(game: game)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Notes and Reviews")
+                            .font(.system(size: 18))
+                            .fontWeight(.bold)
+                            .padding(.bottom, 14)
+                        
+                        if let notes = game.notes, !notes.isEmpty {
+                            Text(notes)
+                                .font(.body)
+                                .multilineTextAlignment(.leading)
+                                .padding()
+                                .background(.slate50)
+                                .frame(maxWidth: .infinity)
+                                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                
+                        } else {
+                            Text("No notes yet 🥺") // Should be illustration here
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.leading)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(.slate50)
+                            
+                            
+                        }
+                    }
                 }
                 .padding(16)
             }
         }
+        .fontDesign(.rounded)
     }
 }
 
