@@ -48,8 +48,23 @@ final class GamesModel {
     var genre: Genres
     var platforms: Platforms
     var coverImageData: Data?
+    var pros: [String?]
+    var cons: [String?]
     
-    init(title: String, developer: String, playtime: Double, rating: Int, notes: String? = nil, completed: Bool, dateAdded: Date, genre: Genres, platforms: Platforms, coverImageData: Data? = nil) {
+    init(
+        title: String,
+        developer: String,
+        playtime: Double,
+        rating: Int,
+        notes: String? = nil,
+        completed: Bool,
+        dateAdded: Date,
+        genre: Genres,
+        platforms: Platforms,
+        coverImageData: Data? = nil,
+        pros: [String?] = [nil, nil, nil],
+        cons: [String?] = [nil, nil, nil]
+    ) {
         self.title = title
         self.developer = developer
         self.playtime = playtime
@@ -60,5 +75,7 @@ final class GamesModel {
         self.genre = genre
         self.platforms = platforms
         self.coverImageData = coverImageData
+        self.pros = pros
+        self.cons = cons
     }
 }

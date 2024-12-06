@@ -153,6 +153,8 @@ struct AddGameScreenView: View {
                 .frame(maxWidth: .infinity)
                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 
+                ProsConsFormView(game: game)
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Button {
                         isNotesSheetPresented.toggle()
