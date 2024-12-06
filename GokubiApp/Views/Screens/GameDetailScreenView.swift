@@ -110,14 +110,13 @@ struct GameDetailScreenView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                                 
                         } else {
-                            Text("No notes yet 🥺") // Should be illustration here
+                            Text("No notes yet 🥺") // Should be empty state illustration here
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.leading)
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .background(.slate50)
-                            
-                            
+                                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                         }
                     }
                 }

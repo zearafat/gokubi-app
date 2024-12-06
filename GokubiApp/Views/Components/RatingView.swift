@@ -20,6 +20,7 @@ struct RatingView: View {
                 ForEach(1...5, id: \.self) { star in
                     Image(systemName: star <= Int(rating) ? "star.fill" : "star")
                         .foregroundColor(.violet600)
+                        .frame(width: 34, height: 34)
                         .onTapGesture {
                             withAnimation {
                                 rating = Int(star)
