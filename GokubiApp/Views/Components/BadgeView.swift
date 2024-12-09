@@ -15,31 +15,31 @@ struct BadgeView: View {
     
     var body: some View {
         if icon?.isEmpty == false {
-            HStack {
+            HStack(alignment: .center) {
                 Image(systemName: icon ?? "")
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(labelColor)
-                    .frame(width: 18, height: 18)
+                    .frame(width: 14, height: 14)
                 
                 Text(label)
                     .foregroundStyle(labelColor)
                     .fontWeight(.semibold)
-                    .font(.subheadline)
+                    .font(.system(size: 12))
                     .fontDesign(.rounded)
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
             .background(backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 100))
         } else {
             Text(label)
                 .foregroundStyle(labelColor)
                 .fontWeight(.semibold)
-                .font(.subheadline)
+                .font(.system(size: 12))
                 .fontDesign(.rounded)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
                 .background(backgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 100))
         }

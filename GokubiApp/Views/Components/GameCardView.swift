@@ -29,15 +29,35 @@ struct GameCardView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
                 
-                VStack(alignment: .leading) {
-                    Text(game.title)
-                        .font(.headline)
-                        .fontDesign(.rounded)
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(game.title)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .fontDesign(.rounded)
+                        
+                        Text(game.developer)
+                            .foregroundStyle(.gray)
+                            .font(.system(size: 14))
+                            .fontDesign(.rounded)
+                    }
                     
-                    Text(game.developer)
-                        .foregroundStyle(.gray)
-                        .font(.subheadline)
-                        .fontDesign(.rounded)
+                    Spacer()
+                    
+                    if game.completed {
+                        BadgeView(
+                            icon: "medal.fill",
+                            label: "Completed",
+                            labelColor: .white,
+                            backgroundColor: .green
+                        )
+                    } else {
+                        BadgeView(
+                            label: "On Progress",
+                            labelColor: .secondary,
+                            backgroundColor: .slate200
+                        )
+                    }
                 }
             }
             
@@ -66,25 +86,7 @@ struct GameCardView: View {
                         .font(.subheadline)
                         .fontDesign(.rounded)
                 }
-                
-                HStack(alignment: .center, spacing: 6) {
-                    if game.completed {
-                        BadgeView(
-                            icon: "medal.fill",
-                            label: "Completed",
-                            labelColor: .white,
-                            backgroundColor: .green
-                        )
-                    } else {
-                        BadgeView(
-                            label: "On Progress",
-                            labelColor: .secondary,
-                            backgroundColor: .slate200
-                        )
-                    }
-                }
             }
-
         }
         .padding()
         .background(.white)
@@ -109,7 +111,17 @@ struct GameCardView: View {
             dateAdded: .now,
             genre: .simulation,
             platforms: .pc,
-            coverImageData: nil
+            coverImageData: .none,
+            pros: [
+                "Gorgeous artwork!",
+                "Great soundtrack!",
+                "Great gameplay!"
+            ],
+            cons: [
+                "Some bugs.",
+                "Not very challenging.",
+                "Not very fun."
+            ]
         )
     )
 }

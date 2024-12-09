@@ -10,14 +10,17 @@ import SwiftUI
 struct WidgetDashboardView: View {
     var games: [GamesModel]
     
+    // Total Hours Played
     var totalHoursPlayed: Double {
         games.reduce(0) { $0 + $1.playtime }
     }
     
+    // Total Completed Games
     var totalCompletedGames: Int {
         games.filter { $0.completed }.count
     }
     
+    // Most Played Genre
     var mostPlayedGenre: Genres? {
         let genrePlayTime = games.reduce(into: [Genres: Double]()) { result, game in
             result[game.genre, default: 0] += game.playtime
@@ -25,6 +28,7 @@ struct WidgetDashboardView: View {
         return genrePlayTime.max(by: { $0.value < $1.value })?.key
     }
     
+    // Most Played Game
     var mostPlayedGame: GamesModel? {
         games.max(by: { $0.playtime < $1.playtime })
     }
@@ -51,6 +55,6 @@ struct WidgetDashboardView: View {
     }
 }
 
-#Preview {
-    WidgetDashboardView(games: [])
-}
+//#Preview {
+//    WidgetDashboardView(games: [])
+//}
