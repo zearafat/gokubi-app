@@ -65,10 +65,28 @@ struct CardGameStatsView: View {
                             }
                             .foregroundStyle(.purple)
                             
-                            
-                            Text("\(game.rating) out of 5")
-                                .font(.system(size: 18))
-                                .fontWeight(.semibold)
+                            if game.rating == 1 {
+                                Text("Bad \(game.rating)/5")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                            } else if game.rating == 2 {
+                                Text("Mediocre \(game.rating)/5")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                            } else if game.rating == 3 {
+                                Text("Good \(game.rating)/5")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                            } else if game.rating == 4 {
+                                Text("Awesome \(game.rating)/5")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                            } else if game.rating == 5 {
+                                Text("Excellent \(game.rating)/5")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.semibold)
+                            }
+
                         }
                         
                         Spacer()
@@ -100,7 +118,8 @@ struct CardGameStatsView: View {
                             }
                             .foregroundStyle(.green)
                             
-                            Text("\(game.genre)")
+                            Text("\(game.genre.rawValue)")
+                                .autocapitalization(.words)
                                 .font(.system(size: 18))
                                 .fontWeight(.semibold)
                         }
@@ -132,7 +151,7 @@ struct CardGameStatsView: View {
                             }
                             .foregroundStyle(.red)
                             
-                            Text("\(game.platforms)")
+                            Text("\(game.platforms.rawValue)")
                                 .font(.system(size: 18))
                                 .fontWeight(.semibold)
                         }

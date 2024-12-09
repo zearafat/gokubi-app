@@ -15,25 +15,26 @@ enum Platforms: String, Codable, CaseIterable {
     case pc = "PC"
     case nintendoSwitch = "Nintendo Switch"
     case mobile = "Mobile"
+    case toaster = "Toaster 🍞"
 }
 
 enum Genres: String, Codable, CaseIterable {
-    case rogueLike
-    case metroidvania
-    case action
-    case adventure
-    case puzzle
-    case rpg
-    case simulation
-    case strategy
-    case horror
-    case platformer
-    case visualNovel
-    case sports
-    case rhythm
-    case sandbox
-    case shooter
-    case other // Catch-all for genres not listed
+    case rogueLike = "Rogue-like"
+    case metroidvania = "Metroidvania"
+    case action = "Action"
+    case adventure = "Adventure"
+    case puzzle = "Puzzle"
+    case rpg = "RPG"
+    case simulation = "Simulation"
+    case strategy = "Strategy"
+    case horror = "Horror"
+    case platformer = "Platformer"
+    case visualNovel = "Visual Novel"
+    case sports = "Sports"
+    case rhythm = "Rhythm"
+    case sandbox = "Sandbox"
+    case shooter = "Shooter"
+    case other = "Other" // Catch-all for genres not listed
 }
 
 @Model
