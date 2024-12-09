@@ -19,39 +19,58 @@ struct ProsConsView: View {
                     .foregroundColor(Color.secondary)
                     .padding(.bottom, 8)
                 
-                HStack {
-                    Image(systemName: "chevron.up.circle.fill")
-                        .foregroundStyle(.green)
-                    
-                    if let gamePros = game.pros[0] {
+                
+                if let gamePros = game.pros[0] {
+                    HStack {
+                        Image(systemName: "chevron.up.circle.fill")
+                            .foregroundStyle(.green)
+                        
                         Text(gamePros)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
                 
-                HStack {
-                    Image(systemName: "chevron.up.circle.fill")
-                        .foregroundStyle(.green)
-                    
-                    if let gamePros = game.pros[1] {
+                if let gamePros = game.pros[1] {
+                    HStack {
+                        Image(systemName: "chevron.up.circle.fill")
+                            .foregroundStyle(.green)
+                        
                         Text(gamePros)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
                 
-                HStack {
-                    Image(systemName: "chevron.up.circle.fill")
-                        .foregroundStyle(.green)
-                    
-                    if let gamePros = game.pros[2] {
+                if let gamePros = game.pros[2] {
+                    HStack {
+                        Image(systemName: "chevron.up.circle.fill")
+                            .foregroundStyle(.green)
+                        
                         Text(gamePros)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
             }
@@ -65,47 +84,64 @@ struct ProsConsView: View {
                     .foregroundColor(Color.secondary)
                     .padding(.bottom, 8)
                 
-                HStack {
-                    Image(systemName: "chevron.down.circle.fill")
-                        .foregroundStyle(.red)
-                    
-                    if let gameCons = game.cons[0] {
+                if let gameCons = game.cons[0] {
+                    HStack {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .foregroundStyle(.red)
+                        
                         Text(gameCons)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
                 
-                HStack {
-                    Image(systemName: "chevron.down.circle.fill")
-                        .foregroundStyle(.red)
-                    
-                    if let gameCons = game.cons[1] {
+                if let gameCons = game.cons[1] {
+                    HStack {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .foregroundStyle(.red)
+                        
                         Text(gameCons)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
                 
-                HStack {
-                    Image(systemName: "chevron.down.circle.fill")
-                        .foregroundStyle(.red)
-                    
-                    if let gameCons = game.cons[2] {
+                if let gameCons = game.cons[2] {
+                    HStack {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .foregroundStyle(.red)
+                        
                         Text(gameCons)
                             .multilineTextAlignment(.leading)
-                    } else {
+                    }
+                } else {
+                    HStack {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundStyle(.slate200)
+                        
                         Text("-")
+                            .foregroundStyle(.slate200)
                     }
                 }
-                
             }
         }
         .fontDesign(.rounded)
-        .padding(24)
-        .background(.slate100)
+        .padding(16)
+        .background(.slate50)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
