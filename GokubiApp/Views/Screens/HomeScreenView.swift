@@ -30,6 +30,8 @@ struct HomeScreenView: View {
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     
+                    WidgetDashboardView(games: games)
+                    
                     ForEach(games) { game in
                         NavigationLink(destination: GameDetailScreenView(game: game)) {
                             GameCardView(game: game)
