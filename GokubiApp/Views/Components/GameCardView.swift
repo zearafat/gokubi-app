@@ -48,14 +48,14 @@ struct GameCardView: View {
                         BadgeView(
                             icon: "medal.fill",
                             label: "Completed",
-                            labelColor: .white,
-                            backgroundColor: .green
+                            labelColor: .green700,
+                            backgroundColor: .green100
                         )
                     } else {
                         BadgeView(
                             label: "On Progress",
                             labelColor: .secondary,
-                            backgroundColor: .slate200
+                            backgroundColor: .slate100
                         )
                     }
                 }

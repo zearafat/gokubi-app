@@ -10,8 +10,8 @@ import SwiftUI
 struct BadgeView: View {
     var icon: String? = ""
     var label: String = ""
-    var labelColor: Color = .white
-    var backgroundColor: Color = .green
+    var labelColor: Color = .green700
+    var backgroundColor: Color = .green100
     
     var body: some View {
         if icon?.isEmpty == false {
@@ -24,7 +24,7 @@ struct BadgeView: View {
                 
                 Text(label)
                     .foregroundStyle(labelColor)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .font(.system(size: 12))
                     .fontDesign(.rounded)
             }
@@ -35,7 +35,7 @@ struct BadgeView: View {
         } else {
             Text(label)
                 .foregroundStyle(labelColor)
-                .fontWeight(.semibold)
+                .fontWeight(.bold)
                 .font(.system(size: 12))
                 .fontDesign(.rounded)
                 .padding(.vertical, 8)
@@ -50,7 +50,7 @@ struct BadgeView: View {
     BadgeView(
         icon: "medal.fill",
         label: "Badge",
-        labelColor: .white,
-        backgroundColor: .green
+        labelColor: .green700,
+        backgroundColor: .green100
     )
 }
