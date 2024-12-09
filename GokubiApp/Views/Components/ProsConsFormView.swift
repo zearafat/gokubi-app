@@ -15,9 +15,14 @@ struct ProsConsFormView: View {
             VStack {
                 HStack(alignment: .center, spacing: 4) {
                     VStack (alignment: .leading) {
-                        Text("✅ Pros")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
+                        HStack(spacing: 8) {
+                            Image(systemName: "chevron.up.circle.fill")
+                                .foregroundStyle(.green)
+                            
+                            Text("Pros")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
                         
                         ForEach(0..<3, id: \.self) { index in
                             TextField("Pro \(index + 1)", text: Binding(
@@ -33,10 +38,15 @@ struct ProsConsFormView: View {
                     }
 
                     VStack (alignment: .leading) {
-                        Text("❌ Cons")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                        
+                        HStack(spacing: 8) {
+                            Image(systemName: "chevron.down.circle.fill")
+                                .foregroundStyle(.red)
+                            
+                            Text("Cons")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                        }
+
                         ForEach(0..<3, id: \.self) { index in
                             TextField("Con \(index + 1)", text: Binding(
                                 get: { game.cons[index] ?? "" },

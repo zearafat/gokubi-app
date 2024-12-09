@@ -220,7 +220,9 @@ struct AddGameScreenView: View {
             dateAdded: .now,
             genre: game.genre,
             platforms: game.platforms,
-            coverImageData: game.coverImageData
+            coverImageData: game.coverImageData,
+            pros: game.pros,
+            cons: game.cons
         )
         modelContext.insert(newGame)
         try? modelContext.save()

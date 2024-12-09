@@ -94,6 +94,8 @@ struct GameDetailScreenView: View {
                     
                     CardGameStatsView(game: game)
                     
+                    ProsConsView(game: game)
+                    
                     VStack(alignment: .leading) {
                         Text("Notes and Reviews")
                             .font(.system(size: 18))
@@ -139,7 +141,17 @@ struct GameDetailScreenView: View {
             dateAdded: .now,
             genre: .action,
             platforms: .nintendoSwitch,
-            coverImageData: .none
+            coverImageData: .none,
+            pros: [
+                "Gorgeous artwork!",
+                "Great soundtrack!",
+                "Great gameplay!"
+            ],
+            cons: [
+                "Some bugs.",
+                "Not very challenging.",
+                "Not very fun."
+            ]
         )
     )
 }

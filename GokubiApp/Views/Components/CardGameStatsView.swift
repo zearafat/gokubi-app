@@ -65,6 +65,7 @@ struct CardGameStatsView: View {
                             }
                             .foregroundStyle(.purple)
                             
+                            
                             Text("\(game.rating) out of 5")
                                 .font(.system(size: 18))
                                 .fontWeight(.semibold)
@@ -160,7 +161,18 @@ struct CardGameStatsView: View {
         completed: true,
         dateAdded: .now,
         genre: .sandbox,
-        platforms: .nintendoSwitch
+        platforms: .nintendoSwitch,
+        coverImageData: .none,
+        pros: [
+            "Gorgeous artwork!",
+            "Great soundtrack!",
+            "Great gameplay!"
+        ],
+        cons: [
+            "Some bugs.",
+            "Not very challenging.",
+            "Not very fun."
+        ]
         )
     )
 }
