@@ -40,7 +40,7 @@ struct WidgetDashboardView: View {
                     Image("time")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 34, height: 34)
+                        .frame(width: 32, height: 32)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Total hours playing:")
@@ -59,7 +59,7 @@ struct WidgetDashboardView: View {
                     Image("sword")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 34, height: 34)
+                        .frame(width: 32, height: 32)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Most played genre")
@@ -81,7 +81,7 @@ struct WidgetDashboardView: View {
                 Image("podium")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 34, height: 34)
+                    .frame(width: 32, height: 32)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Most Played Game: ")
@@ -105,7 +105,6 @@ struct WidgetDashboardView: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .stroke(Color.slate200, lineWidth: 1)
         )
-        .padding(16)
     }
 }
 

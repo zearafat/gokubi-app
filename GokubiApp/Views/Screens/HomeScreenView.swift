@@ -16,28 +16,47 @@ struct HomeScreenView: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .center, spacing: 18) {
-                    Image("dummy-header")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity) // Adjust height as needed
-                        .overlay(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.black.opacity(0.3), Color.clear]),
-                                startPoint: .bottom,
-                                endPoint: .top
+                VStack {
+                    ZStack(alignment: .center) {
+                        Rectangle()
+                            .fill(
+                                LinearGradient(gradient: Gradient(colors: [Color.violet300, Color.violet50, Color.white]), startPoint: .top, endPoint: .bottom)
                             )
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .padding(.top, -160)
+                        
+                        VStack(alignment: .leading, spacing: 24) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Greetings, weary traveler 🧙‍♂️")
+                                    .font(.system(size: 16))
+                                    .fontWeight(.bold)
+
+                                Text("What game thou seek to master this day?")
+                                    .font(.system(size: 14))
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .fontDesign(.rounded)
+ 
+                            WidgetDashboardView(games: games)
+                        }
+                        .padding(.bottom, 24)
+                        .padding(.top, -16)
+                        .padding(.horizontal, 16)
+                    }
                     
-                    WidgetDashboardView(games: games)
-                    
-                    ForEach(games) { game in
-                        NavigationLink(destination: GameDetailScreenView(game: game)) {
-                            GameCardView(game: game)
-                                .padding(.horizontal, 16)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Played games 🎮")
+                            .font(.system(size: 18))
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                        
+                        ForEach(games) { game in
+                            NavigationLink(destination: GameDetailScreenView(game: game)) {
+                                GameCardView(game: game)
+                            }
                         }
                     }
+                    .padding(.horizontal, 16)
                 }
             }
             .toolbar {

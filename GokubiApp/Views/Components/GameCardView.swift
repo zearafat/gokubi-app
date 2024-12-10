@@ -82,6 +82,16 @@ struct GameCardView: View {
                     Text("\(game.rating)/5")
                         .font(.subheadline)
                 }
+                
+                HStack(alignment: .center, spacing: 6) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                    
+                    Text("\(game.genre.rawValue)")
+                        .font(.subheadline)
+                }
             }
         }
         .fontDesign(.rounded)
