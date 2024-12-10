@@ -22,6 +22,7 @@ struct AddGameScreenView: View {
                 VStack(spacing: 8) {
                     PhotosPicker(selection: $selectedImage, matching: .images, photoLibrary: .shared()) {
                         Label("Select cover art", systemImage: "photo")
+                            .font(.system(size: 16))
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                             .foregroundStyle(.white)
@@ -195,6 +196,7 @@ struct AddGameScreenView: View {
         ButtonView(
             label: "Add game",
             textColor: .white,
+            textSize: 16,
             backgroundColor: .violet600,
             dropShadowColor: .violet800,
             action: addGame,

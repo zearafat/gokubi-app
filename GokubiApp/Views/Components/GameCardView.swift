@@ -34,12 +34,10 @@ struct GameCardView: View {
                         Text(game.title)
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .fontDesign(.rounded)
                         
                         Text(game.developer)
                             .foregroundStyle(.gray)
                             .font(.system(size: 14))
-                            .fontDesign(.rounded)
                     }
                     
                     Spacer()
@@ -53,9 +51,9 @@ struct GameCardView: View {
                         )
                     } else {
                         BadgeView(
-                            label: "On Progress",
-                            labelColor: .secondary,
-                            backgroundColor: .slate100
+                            label: "In Progress",
+                            labelColor: .amber700,
+                            backgroundColor: .amber100
                         )
                     }
                 }
@@ -73,7 +71,6 @@ struct GameCardView: View {
                     
                     Text("\(game.playtime.formatted(.number.precision(.fractionLength(0)))) hours")
                         .font(.subheadline)
-                        .fontDesign(.rounded)
                 }
                 
                 HStack(alignment: .center, spacing: 6) {
@@ -84,10 +81,10 @@ struct GameCardView: View {
                     
                     Text("\(game.rating)/5")
                         .font(.subheadline)
-                        .fontDesign(.rounded)
                 }
             }
         }
+        .fontDesign(.rounded)
         .padding()
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))

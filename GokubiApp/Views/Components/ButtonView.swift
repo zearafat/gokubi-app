@@ -10,6 +10,7 @@ import SwiftUI
 struct ButtonView: View {
     var label: String = ""
     var textColor: Color = .black
+    var textSize: CGFloat = 16
     var backgroundColor: Color = .white
     var dropShadowColor: Color = .purple
     var action: (() -> Void)?
@@ -26,6 +27,7 @@ struct ButtonView: View {
                     Image(systemName: iconName)
                 }
                 Text(label)
+                    .font(.system(size: textSize))
             }
             .frame(maxWidth: .infinity)
             .multilineTextAlignment(.center)
@@ -45,6 +47,7 @@ struct ButtonView: View {
                     Image(systemName: iconName)
                 }
                 Text(label)
+                    .font(.system(size: textSize))
             }
             .frame(maxWidth: .infinity)
             .multilineTextAlignment(.center)
@@ -64,6 +67,7 @@ struct ButtonView: View {
     ButtonView(
         label: "Button",
         textColor: .white,
+        textSize: 14,
         backgroundColor: .violet600,
         dropShadowColor: .violet800,
         disabled: false,
