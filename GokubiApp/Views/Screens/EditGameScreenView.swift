@@ -1,15 +1,15 @@
 //
-//  AddGameScreenView.swift
-//  GokubiApp.app
+//  EditGameScreenView.swift
+//  GokubiApp
 //
-//  Created by Alzea Arafat on 03/11/24.
+//  Created by Alzea Arafat on 11/12/24.
 //
 
 import SwiftUI
 import SwiftData
 import PhotosUI
 
-struct AddGameScreenView: View {
+struct EditGameScreenView: View {
     @Environment(\.modelContext) var modelContext
     @Bindable var game: GamesModel
     @Binding var isPresented: Bool
@@ -194,19 +194,18 @@ struct AddGameScreenView: View {
         }
         
         ButtonView(
-            label: "Add Game",
+            label: "Save Game",
             textColor: .white,
             textSize: 16,
             backgroundColor: .violet600,
             dropShadowColor: .violet800,
-            action: addGame,
+            action: editGame,
             disabled: game.title.isEmpty || game.developer.isEmpty
         )
         .padding(.horizontal, 16)
     }
     
-    
-    private func addGame() {
+    private func editGame() {
         withAnimation {
             game.coverImageData = game.coverImageData
             
@@ -214,21 +213,6 @@ struct AddGameScreenView: View {
                 print("DEBUG: Cover image data size: \(imageData.count) bytes")
             }
             
-            let newGame = GamesModel(
-                title: game.title,
-                developer: game.developer,
-                playtime: game.playtime,
-                rating: game.rating,
-                notes: game.notes,
-                completed: game.completed,
-                dateAdded: .now,
-                genre: game.genre,
-                platforms: game.platforms,
-                coverImageData: game.coverImageData,
-                pros: game.pros,
-                cons: game.cons
-            )
-            modelContext.insert(newGame)
             try? modelContext.save()
             isPresented = false
         }
@@ -236,5 +220,5 @@ struct AddGameScreenView: View {
 }
 
 //#Preview {
-//    AddGameScreenView()
+//    EditGameScreenView()
 //}

@@ -9,6 +9,10 @@ import SwiftUI
 
 struct GameDetailScreenView: View {
     var game: GamesModel
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    @State private var showDeleteConfirmation: Bool = false
+    @State private var isPresented: Bool = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -19,14 +23,14 @@ struct GameDetailScreenView: View {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(maxWidth: .infinity, maxHeight: 160)
+                            .frame(maxWidth: .infinity, maxHeight: 200)
                             .clipShape(Rectangle())
                     } else {
                         // Placeholder if image data is unavailable
                         Image("coverartdummy")
                             .resizable()
                             .scaledToFill()
-                            .frame(maxWidth: .infinity, maxHeight: 160)
+                            .frame(maxWidth: .infinity, maxHeight: 200)
                             .clipShape(Rectangle())
                     }
                     
@@ -42,7 +46,7 @@ struct GameDetailScreenView: View {
                                     .stroke(.white, lineWidth: 4)
                             )
                             .shadow(color: Color.black.opacity(0.12) ,radius: 10, x: 0, y: 10)
-                            .padding(.top, 100)
+                            .padding(.top, 200)
                             .padding(.leading, -180)
                     } else {
                         // Placeholder if image data is unavailable
@@ -56,10 +60,11 @@ struct GameDetailScreenView: View {
                                     .stroke(.white, lineWidth: 4)
                             )
                             .shadow(color: Color.black.opacity(0.12) ,radius: 10, x: 0, y: 10)
-                            .padding(.top, 100)
+                            .padding(.top, 200)
                             .padding(.leading, -180)
                     }
                 }
+                .padding(.top, -80)
                 
                 VStack(alignment: .leading, spacing: 34) {
                     VStack(alignment: .leading, spacing: 2) {
@@ -96,7 +101,7 @@ struct GameDetailScreenView: View {
                     
                     ProsConsView(game: game)
                     
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 14) {
                         Text("Notes and Reviews")
                             .font(.system(size: 18))
                             .fontWeight(.bold)
@@ -120,38 +125,77 @@ struct GameDetailScreenView: View {
                                 .background(.slate50)
                                 .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                         }
+                        
+                        Button(role: .destructive) {
+                            showDeleteConfirmation = true
+                        } label: {
+                            Text("Delete")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.red)
+                        .confirmationDialog("Are you sure want to delete this game entry?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
+                            Button("Delete", role: .destructive) {
+                                deleteGames()
+                            }
+                        }
                     }
                 }
                 .padding(16)
             }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("\(game.title)")
+                        .fontWeight(.bold)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Text("Edit")
+                            .fontWeight(.bold)
+                    }
+                    .sheet(isPresented: $isPresented) {
+                        EditGameScreenView(game: game, isPresented: $isPresented)
+                    }
+                }
+            }
+            .fontDesign(.rounded)
         }
         .fontDesign(.rounded)
     }
+    
+    func deleteGames() {
+        let game = game
+        modelContext.delete(game)
+        try? modelContext.save()
+        dismiss()
+    }
 }
 
-#Preview {
-    GameDetailScreenView(
-        game: GamesModel(
-            title: "Hollow Knight",
-            developer: "Team Cherry",
-            playtime: 120,
-            rating: 5,
-            notes: "",
-            completed: true,
-            dateAdded: .now,
-            genre: .action,
-            platforms: .nintendoSwitch,
-            coverImageData: .none,
-            pros: [
-                "Gorgeous artwork!",
-                "Great soundtrack!",
-                "Great gameplay!"
-            ],
-            cons: [
-                "Some bugs.",
-                "Not very challenging.",
-                "Not very fun."
-            ]
-        )
-    )
-}
+//#Preview {
+//    GameDetailScreenView(
+//        game: GamesModel(
+//            title: "Hollow Knight",
+//            developer: "Team Cherry",
+//            playtime: 120,
+//            rating: 5,
+//            notes: "",
+//            completed: true,
+//            dateAdded: .now,
+//            genre: .action,
+//            platforms: .nintendoSwitch,
+//            coverImageData: .none,
+//            pros: [
+//                "Gorgeous artwork!",
+//                "Great soundtrack!",
+//                "Great gameplay!"
+//            ],
+//            cons: [
+//                "Some bugs.",
+//                "Not very challenging.",
+//                "Not very fun."
+//            ]
+//        )
+//    )
+//}

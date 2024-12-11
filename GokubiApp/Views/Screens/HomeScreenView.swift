@@ -17,12 +17,18 @@ struct HomeScreenView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    ZStack(alignment: .center) {
+                    ZStack(alignment: .trailing) {
                         Rectangle()
                             .fill(
                                 LinearGradient(gradient: Gradient(colors: [Color.violet300, Color.violet50, Color.white]), startPoint: .top, endPoint: .bottom)
                             )
                             .padding(.top, -160)
+                        
+                        Image("mascot")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                            .padding(.top, -200)
                         
                         VStack(alignment: .leading, spacing: 24) {
                             VStack(alignment: .leading, spacing: 4) {
@@ -61,9 +67,7 @@ struct HomeScreenView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    HStack {
-                        Text("LOGO")
-                    }
+                    Text("LOGO")
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -114,13 +118,6 @@ struct HomeScreenView: View {
         .background(.slate50)
     }
 }
-    
-//    func deleteGames(at offsets: IndexSet) {
-//        for index in offsets {
-//            let game = games[index]
-//            modelContext.delete(game)
-//        }
-//    }
 
 //#Preview {
 //    HomeScreenView()
