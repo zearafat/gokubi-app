@@ -17,14 +17,14 @@ struct GameCardView: View {
                 if let imageData = game.coverImageData, let uiImage = UIImage(data: imageData) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 44, height: 44) // Adjust frame as needed
+                        .scaledToFill()
+                        .frame(width: 44, height: 44)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 } else {
                     // Placeholder if image data is unavailable
                     Image("coverartdummy")
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                         .frame(width: 44, height: 44)
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
@@ -32,12 +32,14 @@ struct GameCardView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(game.title)
-                            .font(.subheadline)
+                            .lineLimit(1)
+                            .font(.system(size: 16))
                             .fontWeight(.semibold)
                         
                         Text(game.developer)
-                            .foregroundStyle(.gray)
+                            .lineLimit(1)
                             .font(.system(size: 14))
+                            .foregroundStyle(.gray)
                     }
                     
                     Spacer()

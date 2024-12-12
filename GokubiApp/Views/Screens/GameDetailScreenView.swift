@@ -70,6 +70,7 @@ struct GameDetailScreenView: View {
                     VStack(alignment: .leading, spacing: 2) {
                         HStack {
                             Text(game.title)
+                                .lineLimit(1)
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .fontDesign(.rounded)
@@ -147,6 +148,7 @@ struct GameDetailScreenView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("\(game.title)")
+                        .lineLimit(1)
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
