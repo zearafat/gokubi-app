@@ -167,13 +167,13 @@ struct EditGameScreenView: View {
                                 .frame(width: 24, height: 24)
                             
                             Text(game.notes?.isEmpty ?? true ? "Tap to add notes" : game.notes ?? "")
-                                .foregroundColor(.black)
-                                .multilineTextAlignment(.leading)
+                                .padding(.vertical, 16)
+                                .foregroundStyle(.black)
                                 .autocorrectionDisabled(true)
+                                .multilineTextAlignment(.leading)
                         }
-                        .padding()
                         .frame(maxWidth: .infinity)
-                        .background(.slate100)
+                        .background(.slate50)
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                     }
                     .sheet(isPresented: $isNotesSheetPresented) {

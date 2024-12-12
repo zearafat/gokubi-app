@@ -33,7 +33,7 @@ struct NotesSheetScreenView: View {
                             }
                         }
                         ToolbarItem(placement: .principal) {
-                            Text("Edit notes")
+                            Text("Edit Notes")
                                 .font(.headline)
                                 .fontDesign(.rounded)
                         }

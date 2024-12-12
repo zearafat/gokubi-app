@@ -105,7 +105,7 @@ struct GameDetailScreenView: View {
                         Text("Notes and Reviews")
                             .font(.system(size: 18))
                             .fontWeight(.bold)
-                            .padding(.bottom, 14)
+                            .padding(.bottom, 8)
                         
                         if let notes = game.notes, !notes.isEmpty {
                             Text(notes)
@@ -129,10 +129,11 @@ struct GameDetailScreenView: View {
                         Button(role: .destructive) {
                             showDeleteConfirmation = true
                         } label: {
-                            Text("Delete")
+                            Text("Delete Game")
                                 .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
                         }
-                        .buttonStyle(.borderedProminent)
+                        .buttonStyle(.borderless)
                         .tint(.red)
                         .confirmationDialog("Are you sure want to delete this game entry?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
                             Button("Delete", role: .destructive) {
@@ -156,7 +157,24 @@ struct GameDetailScreenView: View {
                             .fontWeight(.bold)
                     }
                     .sheet(isPresented: $isPresented) {
-                        EditGameScreenView(game: game, isPresented: $isPresented)
+                        NavigationStack {
+                            VStack {
+                                EditGameScreenView(game: game, isPresented: $isPresented)
+                                    .scrollIndicators(.hidden)
+                            }
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button {
+                                        isPresented.toggle()
+                                    } label: {
+                                        Image(systemName: "xmark")
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                            }
+                            .navigationTitle("Edit Game")
+                            .navigationBarTitleDisplayMode(.inline)
+                        }
                     }
                 }
             }
