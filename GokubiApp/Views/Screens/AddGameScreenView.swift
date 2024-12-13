@@ -208,11 +208,7 @@ struct AddGameScreenView: View {
     private func addGame() {
         withAnimation {
             game.coverImageData = game.coverImageData
-            
-            if let imageData = game.coverImageData {
-                print("DEBUG: Cover image data size: \(imageData.count) bytes")
-            }
-            
+
             let newGame = GamesModel(
                 title: game.title,
                 developer: game.developer,

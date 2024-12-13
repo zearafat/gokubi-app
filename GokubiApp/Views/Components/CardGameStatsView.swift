@@ -86,9 +86,7 @@ struct CardGameStatsView: View {
                                     .font(.system(size: 18))
                                     .fontWeight(.semibold)
                             }
-
                         }
-                        
                         Spacer()
                     }
 

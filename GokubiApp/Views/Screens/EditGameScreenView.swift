@@ -209,10 +209,6 @@ struct EditGameScreenView: View {
         withAnimation {
             game.coverImageData = game.coverImageData
             
-            if let imageData = game.coverImageData {
-                print("DEBUG: Cover image data size: \(imageData.count) bytes")
-            }
-            
             try? modelContext.save()
             isPresented = false
         }
