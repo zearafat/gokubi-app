@@ -31,7 +31,7 @@ struct CardGameStatsView: View {
                                     .font(.system(size: 14))
                                     .fontWeight(.semibold)
                             }
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.yellow)
                             
                             Text("\(game.playtime.formatted(.number.precision(.fractionLength(0)))) hours")
                                 .font(.system(size: 18))
@@ -63,7 +63,7 @@ struct CardGameStatsView: View {
                                     .font(.system(size: 14))
                                     .fontWeight(.semibold)
                             }
-                            .foregroundStyle(.purple)
+                            .foregroundStyle(.red)
                             
                             if game.rating == 1 {
                                 Text("Bad \(game.rating)/5")
@@ -114,7 +114,7 @@ struct CardGameStatsView: View {
                                     .font(.system(size: 14))
                                     .fontWeight(.semibold)
                             }
-                            .foregroundStyle(.green)
+                            .foregroundStyle(.purple)
                             
                             Text("\(game.genre.rawValue)")
                                 .autocapitalization(.words)
@@ -147,7 +147,7 @@ struct CardGameStatsView: View {
                                     .font(.system(size: 14))
                                     .fontWeight(.semibold)
                             }
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.blue)
                             
                             Text("\(game.platforms.rawValue)")
                                 .font(.system(size: 18))

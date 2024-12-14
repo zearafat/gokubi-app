@@ -51,9 +51,11 @@ struct GameCardView: View {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(game.title)
-                                .lineLimit(1)
+                                .foregroundStyle(.black)
                                 .font(.system(size: 16))
                                 .fontWeight(.semibold)
+                                .lineLimit(1)
+                                
                             
                             Text("By \(game.developer)")
                                 .lineLimit(1)
@@ -82,39 +84,39 @@ struct GameCardView: View {
                 
                 HStack(alignment: .center, spacing: 7) {
                     TagChipView(
-                        icon: "platforms",
+                        icon: "time",
                         label: "\(game.playtime.formatted(.number.precision(.fractionLength(0)))) Hours"
                     )
                     
                     if game.rating == 1 {
                         TagChipView(
-                            icon: "platforms",
+                            icon: "heart",
                             label: "Bad \(game.rating)/5"
                         )
                     } else if game.rating == 2 {
                         TagChipView(
-                            icon: "platforms",
+                            icon: "heart",
                             label: "Mediocre \(game.rating)/5"
                         )
                     } else if game.rating == 3 {
                         TagChipView(
-                            icon: "platforms",
+                            icon: "heart",
                             label: "Good \(game.rating)/5"
                         )
                     } else if game.rating == 4 {
                         TagChipView(
-                            icon: "platforms",
+                            icon: "heart",
                             label: "Awesome \(game.rating)/5"
                         )
                     } else if game.rating == 5 {
                         TagChipView(
-                            icon: "platforms",
+                            icon: "heart",
                             label: "Excellent \(game.rating)/5"
                         )
                     }
                     
                     TagChipView(
-                        icon: "platforms",
+                        icon: "cat",
                         label: "\(game.genre.rawValue)"
                     )
                 }
