@@ -37,7 +37,7 @@ struct WidgetDashboardView: View {
         VStack(alignment: .leading, spacing: 20) {
             HStack(alignment: .center, spacing: 14) {
                 HStack(spacing: 14) {
-                    Image("time")
+                    Image("timeilus")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32, height: 32)

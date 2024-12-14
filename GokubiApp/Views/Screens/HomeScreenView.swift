@@ -24,16 +24,10 @@ struct HomeScreenView: View {
                             )
                             .padding(.top, -160)
                         
-                        Image("mascot")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
-                            .padding(.top, -200)
-                        
                         VStack(alignment: .leading, spacing: 24) {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Greetings, weary traveler 🧙‍♂️")
-                                    .font(.system(size: 16))
+                                    .font(.system(size: 18))
                                     .fontWeight(.bold)
 
                                 Text("What game thou seek to master this day?")
@@ -50,17 +44,20 @@ struct HomeScreenView: View {
                         .padding(.horizontal, 16)
                     }
                     
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 34) {
                         Text("Played games 🎮")
                             .font(.system(size: 18))
                             .fontWeight(.bold)
                             .fontDesign(.rounded)
                         
-                        ForEach(games) { game in
-                            NavigationLink(destination: GameDetailScreenView(game: game)) {
-                                GameCardView(game: game)
+                        VStack(alignment: .leading) {
+                            ForEach(games) { game in
+                                NavigationLink(destination: GameDetailScreenView(game: game)) {
+                                    GameCardView(game: game)
+                                }
                             }
                         }
+
                     }
                     .padding(.horizontal, 16)
                 }

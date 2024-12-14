@@ -12,7 +12,7 @@ struct CardGameStatsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Gaming Stats")
+            Text("Gaming Stats 📍")
                 .font(.system(size: 18))
                 .fontWeight(.bold)
             
@@ -22,7 +22,7 @@ struct CardGameStatsView: View {
                     HStack(alignment: .bottom, spacing: 0) {
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "clock.fill")
+                                Image("time")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 18, height: 18)
@@ -54,7 +54,7 @@ struct CardGameStatsView: View {
                     HStack(alignment: .bottom, spacing: 0) {
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "star.fill")
+                                Image("heart")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 18, height: 18)
@@ -105,7 +105,7 @@ struct CardGameStatsView: View {
                     HStack(alignment: .bottom, spacing: 0) {
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "flag.pattern.checkered")
+                                Image("cat")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 18, height: 18)
@@ -138,7 +138,7 @@ struct CardGameStatsView: View {
                     HStack(alignment: .bottom, spacing: 0) {
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "gamecontroller.fill")
+                                Image("platforms")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 18, height: 18)

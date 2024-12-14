@@ -19,7 +19,7 @@ struct GameCardView: View {
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.bottom, 100)
+                    .padding(.top, -100)
             } else {
                 // Placeholder if image data is unavailable
                 Image("coverartdummy")
@@ -27,7 +27,7 @@ struct GameCardView: View {
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .padding(.bottom, 100)
+                    .padding(.top, -100)
             }
             
             VStack(alignment: .leading, spacing: 24) {
@@ -80,7 +80,7 @@ struct GameCardView: View {
                     }
                 }
                 
-                HStack(alignment: .center, spacing: 6) {
+                HStack(alignment: .center, spacing: 7) {
                     TagChipView(
                         icon: "platforms",
                         label: "\(game.playtime.formatted(.number.precision(.fractionLength(0)))) Hours"
@@ -124,11 +124,13 @@ struct GameCardView: View {
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 0, y: 5)
+            .shadow(color: Color.black.opacity(0.2), radius: 2, x: 0, y: -5)
             .overlay(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .stroke(Color.slate200, lineWidth: 1)
             )
         }
+        .padding(.vertical, 24)
     }
 }
 

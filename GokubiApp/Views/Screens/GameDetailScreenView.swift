@@ -13,6 +13,7 @@ struct GameDetailScreenView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var showDeleteConfirmation: Bool = false
     @State private var isPresented: Bool = false
+    @State private var illustrationOffset: Double = 0.0
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -48,6 +49,16 @@ struct GameDetailScreenView: View {
                             .shadow(color: Color.black.opacity(0.12) ,radius: 10, x: 0, y: 10)
                             .padding(.top, 200)
                             .padding(.leading, -180)
+                            .offset(y: illustrationOffset)
+                            .onAppear {
+                                withAnimation(.bouncy(duration: 0.4)) {
+                                    illustrationOffset = -20.0
+                                } completion: {
+                                    withAnimation(.bouncy(duration: 0.4)) {
+                                        illustrationOffset = 0.0
+                                    }
+                                }
+                            }
                     } else {
                         // Placeholder if image data is unavailable
                         Image("coverartdummy")
@@ -103,7 +114,7 @@ struct GameDetailScreenView: View {
                     ProsConsView(game: game)
                     
                     VStack(alignment: .leading, spacing: 14) {
-                        Text("Notes and Reviews")
+                        Text("Notes and Reviews ✨")
                             .font(.system(size: 18))
                             .fontWeight(.bold)
                             .padding(.bottom, 8)
