@@ -17,13 +17,13 @@ struct RatingView: View {
                 .foregroundColor(.gray)
             
             HStack {
-                ForEach(1...5, id: \.self) { star in
-                    Image(systemName: star <= Int(rating) ? "star.fill" : "star")
-                        .foregroundColor(.violet600)
+                ForEach(1...5, id: \.self) { heart in
+                    Image(systemName: heart <= Int(rating) ? "heart.fill" : "heart")
                         .frame(width: 34, height: 34)
+                        .foregroundColor(.red)
                         .onTapGesture {
                             withAnimation {
-                                rating = Int(star)
+                                rating = Int(heart)
                             }
                         }
                         .contentTransition(.symbolEffect(.replace))

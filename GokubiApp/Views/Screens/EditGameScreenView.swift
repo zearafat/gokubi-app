@@ -85,7 +85,7 @@ struct EditGameScreenView: View {
                         .fontDesign(.rounded)
                     
                     HStack {
-                        Image("masks")
+                        Image("cat")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)

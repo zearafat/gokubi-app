@@ -85,7 +85,7 @@ struct AddGameScreenView: View {
                         .fontDesign(.rounded)
                     
                     HStack {
-                        Image("masks")
+                        Image("cat")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
@@ -208,7 +208,7 @@ struct AddGameScreenView: View {
     private func addGame() {
         withAnimation {
             game.coverImageData = game.coverImageData
-
+            
             let newGame = GamesModel(
                 title: game.title,
                 developer: game.developer,
