@@ -11,7 +11,28 @@ import SwiftData
 struct HomeScreenView: View {
     @Query(sort: \GamesModel.dateAdded, order: .reverse) var games: [GamesModel]
     @State private var isPresented: Bool = false
+    @State private var selectedFilter: GameStatus = .all
     @Environment(\.modelContext) private var modelContext
+    
+    enum GameStatus: String, CaseIterable, Identifiable {
+        case all = "All"
+        case completed = "Completed"
+        case onProgress = "On Progress"
+        
+        var id: String { self.rawValue }
+    }
+    
+    // Filtered games based on selection
+    var filteredGames: [GamesModel] {
+        switch selectedFilter {
+        case .all:
+            return games
+        case .completed:
+            return games.filter { $0.completed == true }
+        case .onProgress:
+            return games.filter { $0.completed == false }
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -45,13 +66,24 @@ struct HomeScreenView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 34) {
-                        Text("Played games 🎮")
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                            .fontDesign(.rounded)
-                        
+                        HStack {
+                            Text("Played games 🎮")
+                                .font(.system(size: 18))
+                                .fontWeight(.bold)
+                                .fontDesign(.rounded)
+                            
+                            Spacer()
+                            
+                            Picker("Filter", selection: $selectedFilter) {
+                                ForEach(GameStatus.allCases) { status in
+                                    Text(status.rawValue).tag(status)
+                                }
+                            }
+                            .pickerStyle(.automatic)
+                        }
+
                         VStack(alignment: .leading) {
-                            ForEach(games) { game in
+                            ForEach(filteredGames) { game in
                                 NavigationLink(destination: GameDetailScreenView(game: game)) {
                                     GameCardView(game: game)
                                 }
@@ -113,6 +145,7 @@ struct HomeScreenView: View {
             }
         }
         .background(.slate50)
+        .fontDesign(.rounded)
     }
 }
 
