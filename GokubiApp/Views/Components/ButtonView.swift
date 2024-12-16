@@ -70,6 +70,7 @@ struct ButtonView: View {
         textSize: 14,
         backgroundColor: .violet600,
         dropShadowColor: .violet800,
+        action: nil,
         disabled: false,
         hasIcon: true,
         iconName: "plus"

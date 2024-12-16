@@ -65,33 +65,58 @@ struct HomeScreenView: View {
                         .padding(.horizontal, 16)
                     }
                     
-                    VStack(alignment: .leading, spacing: 34) {
-                        HStack {
-                            Text("Played games 🎮")
-                                .font(.system(size: 18))
-                                .fontWeight(.bold)
-                                .fontDesign(.rounded)
-                            
-                            Spacer()
-                            
-                            Picker("Filter", selection: $selectedFilter) {
-                                ForEach(GameStatus.allCases) { status in
-                                    Text(status.rawValue).tag(status)
-                                }
-                            }
-                            .pickerStyle(.automatic)
-                        }
+                    VStack(alignment: .center, spacing: 14) {
+                        if filteredGames.isEmpty {
+                            Image(systemName: "tray.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 64, height: 64)
+                                .foregroundStyle(.slate400)
 
-                        VStack(alignment: .leading) {
+                            Text("No Games Found")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.slate400)
+                            
+                            ButtonView(
+                                label: "Add Game",
+                                textColor: .white,
+                                textSize: 14,
+                                backgroundColor: .violet500,
+                                dropShadowColor: .violet700,
+                                action: {
+                                    isPresented = true
+                                },
+                                disabled: false,
+                                hasIcon: false
+                            )
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 34)
+                        }
+                        else {
+                            HStack {
+                                Text("Played games 🎮")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.bold)
+                                    .fontDesign(.rounded)
+                                
+                                Spacer()
+                                
+                                Picker("Filter", selection: $selectedFilter) {
+                                    ForEach(GameStatus.allCases) { status in
+                                        Text(status.rawValue).tag(status)
+                                    }
+                                }
+                                .pickerStyle(.automatic)
+                            }
+                            
                             ForEach(filteredGames) { game in
                                 NavigationLink(destination: GameDetailScreenView(game: game)) {
                                     GameCardView(game: game)
                                 }
                             }
                         }
-
                     }
-                    .padding(.horizontal, 16)
                 }
             }
             .toolbar {
