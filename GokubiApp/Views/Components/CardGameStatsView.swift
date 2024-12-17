@@ -65,31 +65,35 @@ struct CardGameStatsView: View {
                             }
                             .foregroundStyle(.red)
                             
-                            if game.rating == 1 {
-                                Text("Bad \(game.rating)/5")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                            } else if game.rating == 2 {
-                                Text("Mediocre \(game.rating)/5")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                            } else if game.rating == 3 {
-                                Text("Good \(game.rating)/5")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                            } else if game.rating == 4 {
-                                Text("Awesome \(game.rating)/5")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
-                            } else if game.rating == 5 {
-                                Text("Excellent \(game.rating)/5")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.semibold)
+                            if game.rating == 0 {
+                                Text("No ratings yet")
+                                    .foregroundStyle(.slate400)
+                            } else {
+                                if game.rating == 1 {
+                                    Text("Bad \(game.rating)/5")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                } else if game.rating == 2 {
+                                    Text("Mediocre \(game.rating)/5")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                } else if game.rating == 3 {
+                                    Text("Good \(game.rating)/5")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                } else if game.rating == 4 {
+                                    Text("Awesome \(game.rating)/5")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                } else if game.rating == 5 {
+                                    Text("Excellent \(game.rating)/5")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.semibold)
+                                }
                             }
                         }
                         Spacer()
                     }
-
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity)
@@ -124,7 +128,6 @@ struct CardGameStatsView: View {
                         
                         Spacer()
                     }
-
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity)

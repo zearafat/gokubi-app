@@ -22,6 +22,10 @@ struct HomeScreenView: View {
         var id: String { self.rawValue }
     }
     
+    var isGameListEmpy: Bool {
+        games.isEmpty
+    }
+    
     // Filtered games based on selection
     var filteredGames: [GamesModel] {
         switch selectedFilter {
@@ -66,57 +70,95 @@ struct HomeScreenView: View {
                     }
                     
                     VStack(alignment: .center, spacing: 14) {
-                        if filteredGames.isEmpty {
-                            Image(systemName: "tray.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 64, height: 64)
-                                .foregroundStyle(.slate400)
+                        if isGameListEmpy {
+                            // First Timer State (No games exist at all)
+                            VStack {
+                                Image(systemName: "tray.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 64, height: 64)
+                                    .foregroundStyle(.slate400)
 
-                            Text("No Games Found")
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.slate400)
-                            
-                            ButtonView(
-                                label: "Add Game",
-                                textColor: .white,
-                                textSize: 14,
-                                backgroundColor: .violet500,
-                                dropShadowColor: .violet700,
-                                action: {
-                                    isPresented = true
-                                },
-                                disabled: false,
-                                hasIcon: false
-                            )
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 34)
-                        }
-                        else {
-                            HStack {
-                                Text("Played games 🎮")
-                                    .font(.system(size: 18))
-                                    .fontWeight(.bold)
-                                    .fontDesign(.rounded)
+                                Text("No Games Found")
+                                    .font(.headline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.slate400)
+                                    .padding(.vertical, 8)
                                 
-                                Spacer()
+                                Text("Add a new game to start tracking your progress!")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.gray)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.bottom, 16)
                                 
-                                Picker("Filter", selection: $selectedFilter) {
-                                    ForEach(GameStatus.allCases) { status in
-                                        Text(status.rawValue).tag(status)
-                                    }
-                                }
-                                .pickerStyle(.automatic)
+                                ButtonView(
+                                    label: "Add Game",
+                                    textColor: .white,
+                                    textSize: 14,
+                                    backgroundColor: .violet500,
+                                    dropShadowColor: .violet700,
+                                    action: {
+                                        isPresented = true
+                                    },
+                                    disabled: false,
+                                    hasIcon: false
+                                )
                             }
-                            
-                            ForEach(filteredGames) { game in
-                                NavigationLink(destination: GameDetailScreenView(game: game)) {
-                                    GameCardView(game: game)
+                            .padding(24)
+                        } else {
+                            VStack {
+                                HStack {
+                                    Text("Played games 🎮")
+                                        .font(.system(size: 18))
+                                        .fontWeight(.bold)
+                                        .fontDesign(.rounded)
+                                    
+                                    Spacer()
+                                    
+                                    Picker("Filter", selection: $selectedFilter) {
+                                        ForEach(GameStatus.allCases) { status in
+                                            Text(status.rawValue).tag(status)
+                                        }
+                                    }
+                                    .pickerStyle(.automatic)
+                                }
+                                .padding(.bottom, 14)
+                                .padding(.horizontal, 16)
+
+                                if filteredGames.isEmpty {
+                                    // Filter State (Games exist, but filter returns nothing)
+                                    VStack(spacing: 14) {
+                                        Image(systemName: "magnifyingglass")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 100, height: 100)
+                                            .foregroundStyle(.secondary)
+                                        
+                                        Text("No Results Found")
+                                            .font(.headline)
+                                            .fontWeight(.semibold)
+                                            .foregroundStyle(.secondary)
+                                        
+                                        Text("Try changing your filter criteria.")
+                                            .font(.subheadline)
+                                            .foregroundStyle(.gray)
+                                            .multilineTextAlignment(.center)
+                                            .padding(.horizontal, 40)
+                                    }
+                                    .padding(.top, 100)
+                                } else {
+                                    // Show Filtered Results
+                                    ForEach(filteredGames) { game in
+                                        NavigationLink(destination: GameDetailScreenView(game: game)) {
+                                            GameCardView(game: game)
+                                        }
+                                    }
+                                    .padding(16)
                                 }
                             }
                         }
                     }
+
                 }
             }
             .toolbar {
