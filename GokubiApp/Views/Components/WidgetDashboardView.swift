@@ -70,6 +70,11 @@ struct WidgetDashboardView: View {
                             Text("\(genre.rawValue)")
                                 .font(.system(size: 14))
                                 .fontWeight(.bold)
+                        } else {
+                            Text("-")
+                                .foregroundStyle(.slate400)
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
                         }
                     }
                 }
@@ -90,6 +95,11 @@ struct WidgetDashboardView: View {
                     
                     if let game = mostPlayedGame {
                         Text("\(game.title) (\(Int(game.playtime)) hours)")
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                    } else {
+                        Text("-")
+                            .foregroundStyle(.slate400)
                             .font(.system(size: 14))
                             .fontWeight(.bold)
                     }

@@ -12,6 +12,7 @@ struct HomeScreenView: View {
     @Query(sort: \GamesModel.dateAdded, order: .reverse) var games: [GamesModel]
     @State private var isPresented: Bool = false
     @State private var selectedFilter: GameStatus = .all
+    @State private var searchText: String = ""
     @Environment(\.modelContext) private var modelContext
     
     enum GameStatus: String, CaseIterable, Identifiable {
@@ -28,13 +29,22 @@ struct HomeScreenView: View {
     
     // Filtered games based on selection
     var filteredGames: [GamesModel] {
+        let filteredByStatus: [GamesModel]
+        
         switch selectedFilter {
         case .all:
-            return games
+            filteredByStatus = games
         case .completed:
-            return games.filter { $0.completed == true }
+            filteredByStatus = games.filter { $0.completed }
         case .onProgress:
-            return games.filter { $0.completed == false }
+            filteredByStatus = games.filter { !$0.completed }
+        }
+        
+        
+        if searchText.isEmpty {
+            return filteredByStatus
+        } else {
+            return filteredByStatus.filter { $0.title.localizedCaseInsensitiveContains(searchText)}
         }
     }
     
@@ -50,13 +60,13 @@ struct HomeScreenView: View {
                             .padding(.top, -160)
                         
                         VStack(alignment: .leading, spacing: 24) {
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: 6) {
                                 Text("Greetings, weary traveler 🧙‍♂️")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 20))
                                     .fontWeight(.bold)
 
                                 Text("What game thou seek to master this day?")
-                                    .font(.system(size: 14))
+                                    .font(.system(size: 16))
                                     .fontWeight(.semibold)
                                     .foregroundStyle(.secondary)
                             }
@@ -68,6 +78,20 @@ struct HomeScreenView: View {
                         .padding(.top, -16)
                         .padding(.horizontal, 16)
                     }
+                    
+                    HStack(alignment: .top) {
+                      Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .foregroundStyle(.slate500)
+                        .frame(width: 24, height: 24)
+                        TextField("Search games...", text: $searchText)
+                    }
+                    .padding()
+                    .background(.slate100)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .shadow(color: .slate200, radius: 0, x: 0, y: 4)
+                    .padding(.bottom, 12)
+                    .padding(.horizontal, 16)
                     
                     VStack(alignment: .center, spacing: 14) {
                         if isGameListEmpy {
@@ -170,6 +194,12 @@ struct HomeScreenView: View {
                         isPresented.toggle()
                     } label: {
                         Image(systemName: "plus")
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.violet50)
+                            .foregroundStyle(.violet700)
+                            .clipShape(RoundedRectangle(cornerRadius: 100, style: .continuous))
                     }
                     .sheet(isPresented: $isPresented) {
                         NavigationStack {
