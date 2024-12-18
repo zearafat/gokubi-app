@@ -30,7 +30,7 @@ struct TagChipView: View {
         .padding(.horizontal, 8)
         .background(.slate50)
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .shadow(color: Color.gray.opacity(0.25), radius: 0, x: 0, y: 4)
+        .shadow(color: Color.gray.opacity(0.15), radius: 0, x: 0, y: 4)
         .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 4)
         .overlay(
             RoundedRectangle(cornerRadius: 10, style: .continuous)

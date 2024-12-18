@@ -11,9 +11,13 @@ import SwiftData
 struct HomeScreenView: View {
     @Query(sort: \GamesModel.dateAdded, order: .reverse) var games: [GamesModel]
     @State private var isPresented: Bool = false
+    @State private var isSearchSheetPresented: Bool = false
     @State private var selectedFilter: GameStatus = .all
     @State private var searchText: String = ""
+    @State private var navigateToGameDetail: Bool = false
+    @State private var selectedGame: GamesModel? = nil
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     
     enum GameStatus: String, CaseIterable, Identifiable {
         case all = "All"
@@ -39,7 +43,6 @@ struct HomeScreenView: View {
         case .onProgress:
             filteredByStatus = games.filter { !$0.completed }
         }
-        
         
         if searchText.isEmpty {
             return filteredByStatus
@@ -78,20 +81,6 @@ struct HomeScreenView: View {
                         .padding(.top, -16)
                         .padding(.horizontal, 16)
                     }
-                    
-                    HStack(alignment: .top) {
-                      Image(systemName: "magnifyingglass")
-                        .resizable()
-                        .foregroundStyle(.slate500)
-                        .frame(width: 24, height: 24)
-                        TextField("Search games...", text: $searchText)
-                    }
-                    .padding()
-                    .background(.slate100)
-                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                    .shadow(color: .slate200, radius: 0, x: 0, y: 4)
-                    .padding(.bottom, 12)
-                    .padding(.horizontal, 16)
                     
                     VStack(alignment: .center, spacing: 14) {
                         if isGameListEmpy {
@@ -182,18 +171,85 @@ struct HomeScreenView: View {
                             }
                         }
                     }
-
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("LOGO")
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        isSearchSheetPresented.toggle()
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(.violet50)
+                            .foregroundStyle(.violet700)
+                            .clipShape(RoundedRectangle(cornerRadius: 100, style: .continuous))
+                    }
+                    .sheet(isPresented: $isSearchSheetPresented) {
+                        NavigationStack {
+                            ScrollView(showsIndicators: false) {
+                                VStack(alignment: .center, spacing: 24) {
+                                    HStack(alignment: .top) {
+                                        Image(systemName: "magnifyingglass")
+                                            .resizable()
+                                            .foregroundStyle(.slate500)
+                                            .frame(width: 24, height: 24)
+                                        TextField("Search games...", text: $searchText)
+                                    }
+                                    .padding()
+                                    .background(.slate100)
+                                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                    .shadow(color: .slate200, radius: 0, x: 0, y: 4)
+                                    .padding(.bottom, 34)
+                                    .autocorrectionDisabled(true)
+                                    
+                                    ForEach(games.filter { $0.title.localizedCaseInsensitiveContains(searchText) }) { game in
+                                        Button {
+                                            // Close sheet and navigate to game detail
+                                            selectedGame = game
+                                            isSearchSheetPresented = false
+                                            navigateToGameDetail = true
+                                        } label: {
+                                            GameCardView(game: game)
+                                        }
+                                    }
+                                }
+                                .toolbar {
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button {
+                                            isSearchSheetPresented = false
+                                        } label: {
+                                            Image(systemName: "xmark")
+                                                .foregroundStyle(.gray)
+                                        }
+                                    }
+                                }
+                                .padding()
+                                .navigationTitle("Search Game")
+                                .navigationBarTitleDisplayMode(.inline)
+                            }
+                            Spacer()
+                        }
+                    }
+
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isPresented.toggle()
                     } label: {
                         Image(systemName: "plus")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
                             .fontWeight(.bold)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -240,6 +296,12 @@ struct HomeScreenView: View {
                     .presentationDragIndicator(.visible)
                 }
             }
+            .navigationDestination(isPresented: $navigateToGameDetail) {
+                if let game = selectedGame {
+                    GameDetailScreenView(game: game)
+                }
+            }
+
         }
         .background(.slate50)
         .fontDesign(.rounded)
