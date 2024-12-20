@@ -28,9 +28,9 @@ struct ButtonView: View {
                 }
                 Text(label)
                     .font(.system(size: textSize))
+                    .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
-            .multilineTextAlignment(.center)
             .foregroundStyle(textColor)
             .fontWeight(.black)
             .fontDesign(.rounded)
@@ -44,13 +44,23 @@ struct ButtonView: View {
                 action?()
             } label: {
                 if hasIcon {
-                    Image(systemName: iconName)
+                    HStack(alignment: .center, spacing: 14) {
+                        Image(systemName: iconName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        
+                        Text(label)
+                            .font(.system(size: textSize))
+                    }
+                    .frame(maxWidth: .infinity)
+                } else {
+                    Text(label)
+                        .font(.system(size: textSize))
+                        .frame(maxWidth: .infinity)
                 }
-                Text(label)
-                    .font(.system(size: textSize))
             }
             .frame(maxWidth: .infinity)
-            .multilineTextAlignment(.center)
             .foregroundStyle(textColor)
             .fontWeight(.black)
             .fontDesign(.rounded)

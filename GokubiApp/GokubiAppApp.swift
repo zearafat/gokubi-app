@@ -12,7 +12,7 @@ import SwiftData
 struct GokubiAppApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeScreenView()
+            SplashScreenView()
                 .preferredColorScheme(.light)
         }
         .modelContainer(for: GamesModel.self)
