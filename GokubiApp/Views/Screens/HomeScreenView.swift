@@ -14,6 +14,7 @@ struct HomeScreenView: View {
     @State private var isSearchSheetPresented: Bool = false
     @State private var selectedFilter: GameStatus = .all
     @State private var searchText: String = ""
+    @State private var searchSheetText: String = ""
     @State private var navigateToGameDetail: Bool = false
     @State private var selectedGame: GamesModel? = nil
     @Environment(\.modelContext) private var modelContext
@@ -193,7 +194,10 @@ struct HomeScreenView: View {
                             .foregroundStyle(.violet700)
                             .clipShape(RoundedRectangle(cornerRadius: 100, style: .continuous))
                     }
-                    .sheet(isPresented: $isSearchSheetPresented) {
+                    // SEARCH SHEET
+                    .sheet(isPresented: $isSearchSheetPresented, onDismiss: {
+                        searchSheetText = ""
+                    }) {
                         NavigationStack {
                             ScrollView(showsIndicators: false) {
                                 VStack(alignment: .center, spacing: 24) {
@@ -202,7 +206,20 @@ struct HomeScreenView: View {
                                             .resizable()
                                             .foregroundStyle(.slate500)
                                             .frame(width: 24, height: 24)
-                                        TextField("Search games...", text: $searchText)
+                                        TextField("Search games...", text: $searchSheetText)
+                                        
+                                        Spacer()
+                                        
+                                        if searchSheetText.isEmpty == false {
+                                            Button {
+                                                searchSheetText = ""
+                                            } label: {
+                                                Image(systemName: "xmark")
+                                                    .resizable()
+                                                    .foregroundStyle(.slate500)
+                                                    .frame(width: 18, height: 18)
+                                            }
+                                        }
                                     }
                                     .padding()
                                     .background(.slate100)
@@ -211,14 +228,20 @@ struct HomeScreenView: View {
                                     .padding(.bottom, 34)
                                     .autocorrectionDisabled(true)
                                     
-                                    ForEach(games.filter { $0.title.localizedCaseInsensitiveContains(searchText) }) { game in
-                                        Button {
-                                            // Close sheet and navigate to game detail
-                                            selectedGame = game
-                                            isSearchSheetPresented = false
-                                            navigateToGameDetail = true
-                                        } label: {
-                                            GameCardView(game: game)
+                                    if games.filter({ $0.title.localizedCaseInsensitiveContains(searchSheetText) }).isEmpty == true && searchSheetText.isEmpty == false {
+                                        Text("\(searchSheetText) game not found")
+                                            .foregroundStyle(.slate500)
+                                            .font(.subheadline)
+                                    } else {
+                                        ForEach(games.filter { $0.title.localizedCaseInsensitiveContains(searchSheetText) }) { game in
+                                            Button {
+                                                // Close sheet and navigate to game detail
+                                                selectedGame = game
+                                                isSearchSheetPresented = false
+                                                navigateToGameDetail = true
+                                            } label: {
+                                                GameCardView(game: game)
+                                            }
                                         }
                                     }
                                 }
@@ -239,7 +262,11 @@ struct HomeScreenView: View {
                             Spacer()
                         }
                     }
-
+                    .onChange(of: isSearchSheetPresented) {
+                        if !isPresented {
+                            searchSheetText = ""
+                        }
+                    }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {

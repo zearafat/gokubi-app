@@ -132,7 +132,7 @@ struct GameCardView: View {
                     .stroke(Color.slate200, lineWidth: 1)
             )
         }
-        .padding(.vertical, 24)
+        .padding(.vertical, 8)
     }
 }
 
