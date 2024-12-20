@@ -156,7 +156,7 @@ struct AddGameScreenView: View {
                 
                 ProsConsFormView(game: game)
                 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 16) {
                     Button {
                         isNotesSheetPresented.toggle()
                     } label: {
@@ -182,7 +182,23 @@ struct AddGameScreenView: View {
                             set: { game.notes = $0.isEmpty ? nil : $0 }
                         ), isNoteSheetPresented: $isNotesSheetPresented)
                     }
+                    
+                    Divider()
+                        .frame(height: 0.5)
+                        .foregroundStyle(.slate50)
+                        .padding(.vertical, 16)
+                    
+                    ButtonView(
+                        label: "Add Game",
+                        textColor: .white,
+                        textSize: 16,
+                        backgroundColor: .violet600,
+                        dropShadowColor: .violet800,
+                        action: addGame,
+                        disabled: game.title.isEmpty || game.developer.isEmpty
+                    )
                 }
+                .padding(.bottom, 16)
             }
         }
         .fontDesign(.rounded)
@@ -192,17 +208,6 @@ struct AddGameScreenView: View {
                 game.coverImageData = data
             }
         }
-        
-        ButtonView(
-            label: "Add Game",
-            textColor: .white,
-            textSize: 16,
-            backgroundColor: .violet600,
-            dropShadowColor: .violet800,
-            action: addGame,
-            disabled: game.title.isEmpty || game.developer.isEmpty
-        )
-        .padding(.horizontal, 16)
     }
     
     private func addGame() {
