@@ -12,15 +12,17 @@ struct OnboardingSlideView: View {
     var title: String = ""
     var description: String = ""
     var buttonAction: (() -> Void)? = { }
+    var isFirstSlide: Bool = false
+    var isSecondSlide: Bool = false
     var isLastSlide: Bool = false
     
     var body: some View {
         ZStack(alignment: .center) {
             VStack(alignment: .center, spacing: 24) {
-                Image(systemName: image)
+                Image(image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 300, height: 300)
+                    .frame(width: 340, height: 340)
                 
                 Text(title)
                     .fontWeight(.black)
@@ -29,11 +31,37 @@ struct OnboardingSlideView: View {
                 Text(description)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 38)
+                    .padding(.horizontal, 24)
                 
-                if isLastSlide {
+                if isFirstSlide {
                     ButtonView(
-                        label: "Get Started",
+                        label: "➜",
+                        textColor: .white,
+                        textSize: 16,
+                        backgroundColor: .sky400,
+                        dropShadowColor: .sky600,
+                        action: buttonAction,
+                        disabled: false,
+                        hasIcon: false,
+                        iconName: ""
+                    )
+                    .padding(24)
+                } else if isSecondSlide {
+                    ButtonView(
+                        label: "➜",
+                        textColor: .white,
+                        textSize: 16,
+                        backgroundColor: .amber400,
+                        dropShadowColor: .amber600,
+                        action: buttonAction,
+                        disabled: false,
+                        hasIcon: false,
+                        iconName: ""
+                    )
+                    .padding(24)
+                } else if isLastSlide {
+                    ButtonView(
+                        label: "Start your Adventure",
                         textColor: .white,
                         textSize: 16,
                         backgroundColor: .violet600,
@@ -43,29 +71,17 @@ struct OnboardingSlideView: View {
                         hasIcon: false,
                         iconName: ""
                     )
-                    .padding(.vertical, 20)
-                } else {
-                    ButtonView(
-                        label: "➜",
-                        textColor: .white,
-                        textSize: 16,
-                        backgroundColor: .black,
-                        dropShadowColor: .slate600,
-                        action: buttonAction,
-                        disabled: false,
-                        hasIcon: false,
-                        iconName: ""
-                    )
-                    .padding(.vertical, 20)
+                    .padding(24)
                 }
             }
+            .fontDesign(.rounded)
         }
     }
 }
 
 #Preview {
     OnboardingSlideView(
-        image: "plus", title: "Title",
+        image: "onboarding1", title: "Title",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         buttonAction: {},
         isLastSlide: true
