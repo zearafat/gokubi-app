@@ -22,7 +22,7 @@ struct GameCardView: View {
                     .padding(.top, -100)
             } else {
                 // Placeholder if image data is unavailable
-                Image("coverartdummy")
+                Image("placeholder")
                     .resizable()
                     .scaledToFill()
                     .frame(maxWidth: .infinity, maxHeight: 100)
@@ -41,7 +41,7 @@ struct GameCardView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     } else {
                         // Placeholder if image data is unavailable
-                        Image("coverartdummy")
+                        Image("placeholder-square")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 44, height: 44)

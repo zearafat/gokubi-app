@@ -176,7 +176,10 @@ struct HomeScreenView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("LOGO")
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
                 }
                 
                 ToolbarItem(placement: .topBarLeading) {

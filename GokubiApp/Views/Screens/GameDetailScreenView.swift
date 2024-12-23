@@ -28,7 +28,7 @@ struct GameDetailScreenView: View {
                             .clipShape(Rectangle())
                     } else {
                         // Placeholder if image data is unavailable
-                        Image("coverartdummy")
+                        Image("placeholder")
                             .resizable()
                             .scaledToFill()
                             .frame(maxWidth: .infinity, maxHeight: 200)
@@ -61,7 +61,7 @@ struct GameDetailScreenView: View {
                             }
                     } else {
                         // Placeholder if image data is unavailable
-                        Image("coverartdummy")
+                        Image("placeholder-square")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 84, height: 84)
@@ -166,8 +166,11 @@ struct GameDetailScreenView: View {
                     Button {
                         isPresented.toggle()
                     } label: {
-                        Text("Edit")
-                            .fontWeight(.bold)
+                        Image("edit")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.violet600)
                     }
                     .sheet(isPresented: $isPresented) {
                         NavigationStack {

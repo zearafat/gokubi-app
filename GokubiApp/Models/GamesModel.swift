@@ -15,7 +15,7 @@ enum Platforms: String, Codable, CaseIterable {
     case pc = "PC"
     case nintendoSwitch = "Nintendo Switch"
     case mobile = "Mobile"
-    case toaster = "Toaster 🍞"
+    case emulation = "Emulation 🕹️"
 }
 
 enum Genres: String, Codable, CaseIterable {

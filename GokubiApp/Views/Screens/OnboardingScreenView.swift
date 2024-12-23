@@ -32,7 +32,7 @@ struct OnboardingScreenView: View {
                     ).tag(0)
                     OnboardingSlideView(
                         image: "onboarding02", title: "Stay Organized",
-                        description: "Log your favorite games, add games, easly find and manage them. It's like a diary but for your games.",
+                        description: "Log your favorite games, add games, easly find and manage them. It's like a diary but for all your games.",
                         buttonAction: {
                             withAnimation {
                                 currentTab += 1
@@ -41,7 +41,7 @@ struct OnboardingScreenView: View {
                         isSecondSlide: true
                     ).tag(1)
                     OnboardingSlideView(
-                        image: "onboarding1", title: "Level Up Your Experience",
+                        image: "onboarding03", title: "Level Up Your Experience",
                         description: "A seamless way to track your progress and organize your favorite games. Start your adventure today!",
                         buttonAction: {
                             withAnimation {

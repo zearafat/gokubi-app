@@ -23,12 +23,12 @@ struct SplashScreenView: View {
                 }
             } else {
                 ZStack {
-                    Color(.yellow)
+                    Color(.violet700)
                         .ignoresSafeArea(.all)
                     VStack {
                         Spacer()
                         VStack(alignment: .center, spacing: 24) {
-                            Image("xmark")
+                            Image("mascot")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 240)
