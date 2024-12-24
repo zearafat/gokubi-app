@@ -209,7 +209,9 @@ struct HomeScreenView: View {
                                             .resizable()
                                             .foregroundStyle(.slate500)
                                             .frame(width: 24, height: 24)
+                                        
                                         TextField("Search games...", text: $searchSheetText)
+                                            .autocorrectionDisabled(true)
                                         
                                         Spacer()
                                         
@@ -244,6 +246,7 @@ struct HomeScreenView: View {
                                                 navigateToGameDetail = true
                                             } label: {
                                                 GameCardView(game: game)
+                                                    .padding(.vertical, 8)
                                             }
                                         }
                                     }
