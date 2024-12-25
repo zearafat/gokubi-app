@@ -182,7 +182,23 @@ struct EditGameScreenView: View {
                             set: { game.notes = $0.isEmpty ? nil : $0 }
                         ), isNoteSheetPresented: $isNotesSheetPresented)
                     }
+                    
+                    Divider()
+                        .frame(height: 0.5)
+                        .foregroundStyle(.slate50)
+                        .padding(.vertical, 16)
+                    
+                    ButtonView(
+                        label: "Save Game",
+                        textColor: .white,
+                        textSize: 16,
+                        backgroundColor: .violet600,
+                        dropShadowColor: .violet800,
+                        action: editGame,
+                        disabled: game.title.isEmpty || game.developer.isEmpty
+                    )
                 }
+                .padding(.bottom, 16)
             }
         }
         .fontDesign(.rounded)
@@ -192,17 +208,6 @@ struct EditGameScreenView: View {
                 game.coverImageData = data
             }
         }
-        
-        ButtonView(
-            label: "Save Game",
-            textColor: .white,
-            textSize: 16,
-            backgroundColor: .violet600,
-            dropShadowColor: .violet800,
-            action: editGame,
-            disabled: game.title.isEmpty || game.developer.isEmpty
-        )
-        .padding(.horizontal, 16)
     }
     
     private func editGame() {
